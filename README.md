@@ -12,7 +12,8 @@
 ## 工具
   [Git](https://git-scm.com/downloads)  
   [Visual-Paradigm](https://www.visual-paradigm.com)  
-  [Flyway](https://flywaydb.org/getstated/firststeps/maven)
+  [Flyway](https://flywaydb.org/getstated/firststeps/maven)  
+  [lombok](https://projectlombok.org/features/all)
 
 ## 脚本
 ```sql
