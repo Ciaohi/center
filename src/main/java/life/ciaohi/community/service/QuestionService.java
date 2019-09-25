@@ -1,5 +1,6 @@
 package life.ciaohi.community.service;
 
+import life.ciaohi.community.dto.PageinationDTO;
 import life.ciaohi.community.dto.QuestionDTO;
 import life.ciaohi.community.mapper.QuesstionMapper;
 import life.ciaohi.community.mapper.UserMapper;
@@ -20,10 +21,28 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<QuestionDTO> list() {
+    public PageinationDTO list(Integer page, Integer size) {
 
-        List<Question> questions = quesstionMapper.list();
+
+
+        PageinationDTO pageinationDTO=new PageinationDTO();
+        Integer totalCount=quesstionMapper.count();
+        pageinationDTO.setPagination(totalCount,page,size);
+
+
+        if(page<1){
+            page=1;
+        }
+        if(page>pageinationDTO.getTotalPage()){
+            page=pageinationDTO.getTotalPage();
+        }
+
+        //size*(page-1)算limit偏移量
+        Integer offset=size*(page-1);
+        List<Question> questions = quesstionMapper.list(offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
+
+
         for (Question question : questions) {
             User user = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -31,7 +50,9 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        return questionDTOList;
+        pageinationDTO.setQuestions(questionDTOList);
+
+        return pageinationDTO;
     }
 
 }

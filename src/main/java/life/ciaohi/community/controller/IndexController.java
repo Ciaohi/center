@@ -1,5 +1,6 @@
 package life.ciaohi.community.controller;
 
+import life.ciaohi.community.dto.PageinationDTO;
 import life.ciaohi.community.dto.QuestionDTO;
 import life.ciaohi.community.mapper.QuesstionMapper;
 import life.ciaohi.community.mapper.UserMapper;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import javax.servlet.http.Cookie;
@@ -29,7 +31,10 @@ public class IndexController {
    private QuestionService questionService;
     @GetMapping("/")
     public String index(HttpServletRequest request,
-                        Model model){
+                        Model model,
+                        //传递两个参数page代表页码,size代表一个分页展示的数量
+                        @RequestParam(name="page",defaultValue="1") Integer page,
+                        @RequestParam(name="size",defaultValue="2") Integer size){
         Cookie[] cookies = request.getCookies();
 
         if(cookies !=null && cookies.length!=0)
@@ -44,8 +49,9 @@ public class IndexController {
                 }
             }
 
-            List<QuestionDTO> questionList= questionService.list();
-            model.addAttribute("questions",questionList);
+            PageinationDTO pageination= questionService.list(page,size);
+
+            model.addAttribute("pageination",pageination);
             return "index";
 
     }
