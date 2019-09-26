@@ -34,7 +34,7 @@ public class IndexController {
                         Model model,
                         //传递两个参数page代表页码,size代表一个分页展示的数量
                         @RequestParam(name="page",defaultValue="1") Integer page,
-                        @RequestParam(name="size",defaultValue="2") Integer size){
+                        @RequestParam(name="size",defaultValue="5") Integer size){
         Cookie[] cookies = request.getCookies();
 
         if(cookies !=null && cookies.length!=0)
