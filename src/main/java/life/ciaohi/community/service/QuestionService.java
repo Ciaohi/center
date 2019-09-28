@@ -2,7 +2,7 @@ package life.ciaohi.community.service;
 
 import life.ciaohi.community.dto.PageinationDTO;
 import life.ciaohi.community.dto.QuestionDTO;
-import life.ciaohi.community.mapper.QuesstionMapper;
+import life.ciaohi.community.mapper.QuestionMapper;
 import life.ciaohi.community.mapper.UserMapper;
 import life.ciaohi.community.model.Question;
 import life.ciaohi.community.model.User;
@@ -17,7 +17,7 @@ import java.util.List;
 public class QuestionService {
 
     @Autowired
-    private QuesstionMapper quesstionMapper;
+    private QuestionMapper questionMapper;
     @Autowired
     private UserMapper userMapper;
 
@@ -25,7 +25,7 @@ public class QuestionService {
         PageinationDTO pageinationDTO=new PageinationDTO();
         Integer totalPage;
 
-        Integer totalCount=quesstionMapper.count();
+        Integer totalCount= questionMapper.count();
 
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
@@ -46,7 +46,7 @@ public class QuestionService {
 
         //size*(page-1)算limit偏移量
         Integer offset=size*(page-1);
-        List<Question> questions = quesstionMapper.list(offset,size);
+        List<Question> questions = questionMapper.list(offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
 
@@ -67,7 +67,7 @@ public class QuestionService {
 
         Integer totalPage;
 
-        Integer totalCount=quesstionMapper.countByUserId(userId);
+        Integer totalCount= questionMapper.countByUserId(userId);
 
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
@@ -88,7 +88,7 @@ public class QuestionService {
 
         //size*(page-1)算limit偏移量
         Integer offset=size*(page-1);
-        List<Question> questions = quesstionMapper.listByUserId(userId,offset,size);
+        List<Question> questions = questionMapper.listByUserId(userId,offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
 
@@ -105,11 +105,25 @@ public class QuestionService {
     }
 
     public QuestionDTO getById(Integer id) {
-        Question question=quesstionMapper.getById(id);
+        Question question= questionMapper.getById(id);
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
         User user = userMapper.findById(question.getCreator());
         questionDTO.setUser(user);
         return questionDTO;
+    }
+
+    public void createOrUpdate(Question question) {
+        if(question.getId()==null){
+            //创建
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.create(question);
+        }else{
+            //更新
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.updte(question);
+
+        }
     }
 }

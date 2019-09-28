@@ -57,10 +57,10 @@ public class AuthorizeController {
            user.setAvatarUrl(githubUser.getAvatarUrl() );
            userService.createOrUpdate(user);
            response.addCookie(new Cookie("token",token));
-           return "redirect:index:/";
+           return "redirect:/";
        }else{
            //登录失败，重新登录
-           return "redirect:index:/";
+           return "redirect:/";
        }
     }
 
