@@ -2,6 +2,8 @@ package life.ciaohi.community.service;
 
 import life.ciaohi.community.dto.PageinationDTO;
 import life.ciaohi.community.dto.QuestionDTO;
+import life.ciaohi.community.exceptin.CustomizeErrorCode;
+import life.ciaohi.community.exceptin.CustomizeException;
 import life.ciaohi.community.mapper.QuestionMapper;
 import life.ciaohi.community.mapper.UserMapper;
 import life.ciaohi.community.model.Question;
@@ -111,6 +113,11 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
         Question question= questionMapper.selectByPrimaryKey(id);
+
+        if(question==null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
+
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
         User user = userMapper.selectByPrimaryKey(question.getCreator());
@@ -134,7 +141,10 @@ public class QuestionService {
             QuestionExample example=new QuestionExample();
             example.createCriteria()
                     .andCreatorEqualTo(question.getId());
-            questionMapper.updateByExampleSelective(updateQuestion,example);
+            int updated=questionMapper.updateByExampleSelective(updateQuestion,example);
+            if(updated!=1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
 
         }
     }
