@@ -4,6 +4,7 @@ import life.ciaohi.community.dto.PageinationDTO;
 import life.ciaohi.community.dto.QuestionDTO;
 import life.ciaohi.community.exceptin.CustomizeErrorCode;
 import life.ciaohi.community.exceptin.CustomizeException;
+import life.ciaohi.community.mapper.QuestionExtMapper;
 import life.ciaohi.community.mapper.QuestionMapper;
 import life.ciaohi.community.mapper.UserMapper;
 import life.ciaohi.community.model.Question;
@@ -22,6 +23,9 @@ public class QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
+
     @Autowired
     private UserMapper userMapper;
 
@@ -147,5 +151,14 @@ public class QuestionService {
             }
 
         }
+    }
+
+    public void incView(Integer id) {
+
+        Question question=new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
+
     }
 }
