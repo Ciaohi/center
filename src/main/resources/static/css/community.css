@@ -1,13 +1,13 @@
-body{
+body {
     background-color: #efefef;
 }
 
-.main{
+.main {
     background-color: white;
-    margin:30px;
+    margin: 30px;
 }
 
-.btn-publish{
+.btn-publish {
     float: right;
     margin-bottom: 15px;
 }
@@ -17,19 +17,34 @@ body{
     height: 38px;
 }
 
-.text-desc{
+.media-body {
+    padding-top: 10px;
+}
+
+.text-desc {
     font-size: 12px;
     font-weight: normal;
     color: #999;
 }
 
-.profile .section{
+.profile .section {
     margin-top: 15px;
 }
-.community-menu{
-    color:#999;
+
+.community-menu {
+    color: #999;
     font-size: 13px;
 }
-.jumbotron{
-    margin:50px;
+
+.jumbotron {
+    margin: 50px;
+}
+
+.comment {
+    margin: 10px 0;
+}
+
+.btn-comment {
+    float: right;
+    margin-bottom: 10px;
 }
