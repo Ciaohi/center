@@ -4,10 +4,7 @@ import life.ciaohi.community.dto.CommentDTO;
 import life.ciaohi.community.enums.CommentTypeEnum;
 import life.ciaohi.community.exceptin.CustomizeErrorCode;
 import life.ciaohi.community.exceptin.CustomizeException;
-import life.ciaohi.community.mapper.CommentMapper;
-import life.ciaohi.community.mapper.QuestionExtMapper;
-import life.ciaohi.community.mapper.QuestionMapper;
-import life.ciaohi.community.mapper.UserMapper;
+import life.ciaohi.community.mapper.*;
 import life.ciaohi.community.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +30,10 @@ public class CommentService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    CommentExtMapper commentExtMapper;
+
+
     @Transactional
     public void insert(Comment comment) {
         if(comment.getParentId()==null || comment.getParentId()==0){
@@ -49,6 +50,11 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             commentMapper.insert(comment);
+            //增加评论数
+            Comment parentCommet=new Comment();
+            parentCommet.setId(comment.getParentId());
+            parentCommet.setCommentCount(1);
+            commentExtMapper.incCommentCount(parentCommet);
         }else{
             //回复问题
             Question question=questionMapper.selectByPrimaryKey(comment.getParentId());
