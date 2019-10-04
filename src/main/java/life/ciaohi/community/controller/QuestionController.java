@@ -1,9 +1,9 @@
 package life.ciaohi.community.controller;
 
 
-import life.ciaohi.community.dto.CommentCreateDTO;
 import life.ciaohi.community.dto.CommentDTO;
 import life.ciaohi.community.dto.QuestionDTO;
+import life.ciaohi.community.enums.CommentTypeEnum;
 import life.ciaohi.community.service.CommentService;
 import life.ciaohi.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class QuestionController {
     public String question(@PathVariable(name="id")Long id, Model model){
 
         QuestionDTO questionDTO= questionService.getById(id);
-        List<CommentDTO> comments=commentService.listByQuestionId(id);
+        List<CommentDTO> comments=commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
         //累加阅读数
         questionService.incView(id);
         model.addAttribute("question",questionDTO);

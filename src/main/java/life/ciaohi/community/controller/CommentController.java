@@ -2,7 +2,9 @@ package life.ciaohi.community.controller;
 
 
 import life.ciaohi.community.dto.CommentCreateDTO;
+import life.ciaohi.community.dto.CommentDTO;
 import life.ciaohi.community.dto.ResultDTO;
+import life.ciaohi.community.enums.CommentTypeEnum;
 import life.ciaohi.community.exceptin.CustomizeErrorCode;
 import life.ciaohi.community.model.Comment;
 import life.ciaohi.community.model.User;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -44,6 +47,13 @@ public class CommentController {
 
         return ResultDTO.okOf();
 
-    };
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/comment/{id}",method=RequestMethod.GET)
+    public ResultDTO <List<CommentDTO>>comments(@PathVariable(name="id") Long id){
+        List<CommentDTO> commentDTOS=commentService.listByTargetId(id,CommentTypeEnum.COMMENT);
+        return ResultDTO.okOf(commentDTOS);
+    }
 
 }
