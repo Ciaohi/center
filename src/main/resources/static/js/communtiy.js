@@ -115,10 +115,41 @@ function collapseComments(e) {
                 e.setAttribute("data-collapse","in");
                 e.classList.add("active");
             });
-
-
         }
+    }
+}
 
+function showSelectTag() {
+    $("#select-tag").show();
+}
 
+function selectTag(e) {
+
+    var flag=true;
+    //从后台得到标签值
+    var value=e.getAttribute("data-tag");
+
+    //得到输入框中标签值
+    var previous=$("#tag").val();
+
+    //将输入框中的字符按,分割得到标签数组
+    var psplits=previous.split(",");
+    //循环数组与后台得到的值进行比较
+
+    //判断是否添加重复标签
+    for(var i=0;i<psplits.length;i++){
+        if(psplits[i]==value){
+            flag=flase;
+        }
+    }
+    //如果没有重复元素的话,在添加
+    if(flag){
+        //如果前面有值的话,加上从台得到的值
+        if(previous){
+            $("#tag").val(previous+','+value);
+        }else{
+            //前面无值,不用加
+            $("#tag").val(value);
+        }
     }
 }
