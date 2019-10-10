@@ -35,6 +35,7 @@ public class QuestionService {
 
     public PageinationDTO list(Integer page, Integer size) {
         PageinationDTO pageinationDTO=new PageinationDTO();
+
         Integer totalPage;
 
         Integer totalCount=(int) questionMapper.countByExample(new QuestionExample());
@@ -68,7 +69,7 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        pageinationDTO.setQuestions(questionDTOList);
+        pageinationDTO.setData(questionDTOList);
 
         return pageinationDTO;
     }
@@ -116,7 +117,7 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        pageinationDTO.setQuestions(questionDTOList);
+        pageinationDTO.setData(questionDTOList);
 
         return pageinationDTO;
     }

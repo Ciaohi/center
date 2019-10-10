@@ -139,7 +139,7 @@ function selectTag(e) {
     //判断是否添加重复标签
     for(var i=0;i<psplits.length;i++){
         if(psplits[i]==value){
-            flag=flase;
+            flag=false;
         }
     }
     //如果没有重复元素的话,在添加
