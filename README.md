@@ -18,8 +18,9 @@
   [Flyway](https://flywaydb.org/getstated/firststeps/maven)  
   [lombok](https://projectlombok.org/features/all)  
   [MyBatis Generator](http://mybatis.org/generator/)  
-  [Json](http://jsoneditoronline.org/)
-  
+  [Json](http://jsoneditoronline.org/)  
+  [Markdown 插件](http://editor.md.ipandao.com)
+ 
 ## 脚本
 ```sql
  CREATE TABLE USER
