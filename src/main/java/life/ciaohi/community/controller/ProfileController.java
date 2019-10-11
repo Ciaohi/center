@@ -39,16 +39,14 @@ public class ProfileController {
 
         if("questions".equals(action)){
             model.addAttribute("section","questions");
-            model.addAttribute("sectionName","我的提问");
+            model.addAttribute("sectionName","我的问题");
             PageinationDTO pageination= questionService.list(user.getId(),page,size);
             model.addAttribute("pageination",pageination);
 
         }else if("replies".equals(action)){
             PageinationDTO pageinationDTO=notificationService.list(user.getId(),page,size);
-            Long unreadCount=notificationService.unreadCount(user.getId());
             model.addAttribute("section","replies");
             model.addAttribute("pageination",pageinationDTO);
-            model.addAttribute("unreadCount",unreadCount);
             model.addAttribute("sectionName","最新回复");
         }
 
