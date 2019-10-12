@@ -19,8 +19,10 @@
   [lombok](https://projectlombok.org/features/all)  
   [MyBatis Generator](http://mybatis.org/generator/)  
   [Json](http://jsoneditoronline.org/)  
-  [Markdown 插件](http://editor.md.ipandao.com)
- 
+  [Markdown 插件](http://editor.md.ipandao.com)  
+  [UFile SDK](https://github.com/ucloud/ufile-sdk-java)
+  
+  
 ## 脚本
 ```sql
  CREATE TABLE USER

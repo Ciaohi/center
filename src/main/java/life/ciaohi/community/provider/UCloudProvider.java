@@ -4,9 +4,7 @@ package life.ciaohi.community.provider;
 
 import cn.ucloud.ufile.UfileClient;
 import cn.ucloud.ufile.api.object.ObjectConfig;
-import cn.ucloud.ufile.auth.BucketAuthorization;
 import cn.ucloud.ufile.auth.ObjectAuthorization;
-import cn.ucloud.ufile.auth.UfileBucketLocalAuthorization;
 import cn.ucloud.ufile.auth.UfileObjectLocalAuthorization;
 import cn.ucloud.ufile.bean.PutObjectResultBean;
 import cn.ucloud.ufile.exception.UfileClientException;
@@ -24,9 +22,21 @@ import java.util.UUID;
 public class UCloudProvider {
     @Value("${ucloud.ufile.public-key}")
     private String publicKey;
+
     @Value("${ucloud.ufile.private-key}")
     private String privateKey;
-    private String bucketName="keeplearning";
+
+    @Value("${ucloud.ufile.bucket-name}")
+    private String bucketName;
+
+    @Value("${ucloud.ufile.region}")
+    private String region;
+
+    @Value("${ucloud.ufile.suffix}")
+    private String suffix;
+
+    @Value("${ucloud.ufile.expires}")
+    private Integer expires;
 
 
     public String upload(InputStream fileStream,String mimeType,String fileName){
@@ -39,7 +49,7 @@ public class UCloudProvider {
         }
         try {
             ObjectAuthorization objectAuthorization = new UfileObjectLocalAuthorization(publicKey, privateKey);
-            ObjectConfig config = new ObjectConfig("cn-sh2", "ufileos.com");
+            ObjectConfig config = new ObjectConfig(region, suffix);
             PutObjectResultBean response = UfileClient.object(objectAuthorization, config)
                 .putObject(fileStream, mimeType)
                 .nameAs(generateFileName)
@@ -49,7 +59,7 @@ public class UCloudProvider {
                 .execute();
             if(response!=null &&response.getRetCode()==0){
                     String url = UfileClient.object(objectAuthorization, config)
-                            .getDownloadUrlFromPrivateBucket(generateFileName, bucketName, 24*60*60*365*10)
+                            .getDownloadUrlFromPrivateBucket(generateFileName, bucketName, expires)
                             .createUrl();
                     return url;
                 }else{
