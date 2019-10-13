@@ -25,11 +25,12 @@ public class IndexController {
                         Model model,
                         //传递两个参数page代表页码,size代表一个分页展示的数量
                         @RequestParam(name="page",defaultValue="1") Integer page,
-                        @RequestParam(name="size",defaultValue="5") Integer size){
-
-            PageinationDTO pageination= questionService.list(page,size);
-
+                        @RequestParam(name="size",defaultValue="5") Integer size,
+                        @RequestParam(name="search",required = false) String search
+                        ) {
+            PageinationDTO pageination= questionService.list(search,page,size);
             model.addAttribute("pageination",pageination);
+            model.addAttribute("search",search);
             return "index";
 
     }

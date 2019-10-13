@@ -2,6 +2,7 @@ package life.ciaohi.community.service;
 
 import life.ciaohi.community.dto.PageinationDTO;
 import life.ciaohi.community.dto.QuestionDTO;
+import life.ciaohi.community.dto.QuestionQueryDTO;
 import life.ciaohi.community.exceptin.CustomizeErrorCode;
 import life.ciaohi.community.exceptin.CustomizeException;
 import life.ciaohi.community.mapper.QuestionExtMapper;
@@ -33,12 +34,20 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public PageinationDTO list(Integer page, Integer size) {
+    public PageinationDTO list(String search,Integer page, Integer size) {
+
+        if(StringUtils.isNotBlank(search)){
+            String[] tags= StringUtils.split(search," ");
+            search=Arrays.stream(tags).collect(Collectors.joining("|"));;
+        }
+
         PageinationDTO pageinationDTO=new PageinationDTO();
 
         Integer totalPage;
 
-        Integer totalCount=(int) questionMapper.countByExample(new QuestionExample());
+        QuestionQueryDTO questionQueryDTO=new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalCount=questionExtMapper.countBySearch(questionQueryDTO);
 
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
@@ -54,11 +63,12 @@ public class QuestionService {
         }
 
         pageinationDTO.setPagination(totalPage,page);
-        //size*(page-1)算limit偏移量
         Integer offset=size*(page-1);
         QuestionExample questionExample=new QuestionExample();
         questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questions =questionMapper.selectByExampleWithRowbounds(questionExample,new RowBounds(offset,size));
+        questionQueryDTO.setSize(size);
+        questionQueryDTO.setPage(offset);
+        List<Question> questions =questionExtMapper.selectBySearch(questionQueryDTO);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
 
