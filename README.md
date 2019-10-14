@@ -1,5 +1,27 @@
 ## 学习社区
 
+##部署
+### 依赖
+- Git
+- JDK
+- Maven
+- MySQL
+## 步骤
+- yum update 
+- yum install git
+- mkdir App
+- cd App
+- git clone https://github.com/Ciaohi/center.git
+- yum install maven
+- mvn -v
+- mvn compile package
+- cp src/main/resources/application.properties src/main/resources/application-production.properties
+- vim src/main/resources/application-production.properties
+- mvn package
+- java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.jar
+- ps -aux | grep java
+- git pull  
+
 ## 资料
   [Spring 文档](https://spring.io/guides)  
   [Spring Web](https://spring.io/guides/gs/serving-web-content/ )  
@@ -10,7 +32,7 @@
   [Spring](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-embedded-database-support)  
   [themeleaf](https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#expressions-on-selections-asterisk-syntax)  
   [octotree](https://www.octotree.io)  
-  
+ 
   
 
   
