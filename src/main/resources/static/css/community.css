@@ -45,7 +45,8 @@ body {
     line-height: 20px;
 }
 .question-wechat{
-    width: 100%;
+    height: 215px;
+    width: 215px;;
 }
 .publish-tag-tab{
     display: none;
