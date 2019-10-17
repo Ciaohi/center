@@ -21,6 +21,7 @@
 - java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.jar
 - ps -aux | grep java
 - git pull  
+- nohup后台运行nohup java -jar 项目名 --server.port=80 & 要把项目挂起
 
 ## 资料
   [Spring 文档](https://spring.io/guides)  
