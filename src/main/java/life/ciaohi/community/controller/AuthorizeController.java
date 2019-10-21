@@ -61,7 +61,7 @@ public class AuthorizeController {
            response.addCookie(new Cookie("token",token));
            return "redirect:/";
        }else{
-           log.error("callback get github error,{}",githubUsergi);
+           log.error("callback get github error,{}",githubUser);
            //登录失败，重新登录
            return "redirect:/";
        }
