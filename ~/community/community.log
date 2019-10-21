@@ -1,0 +1,14 @@
+2019-10-13 16:31:40.414  INFO 6640 --- [restartedMain] l.ciaohi.community.CommunityApplication  : Starting CommunityApplication on ciao with PID 6640 (H:\Code\community\target\classes started by ciaohi in H:\Code\community)
+2019-10-13 16:31:40.417  INFO 6640 --- [restartedMain] l.ciaohi.community.CommunityApplication  : No active profile set, falling back to default profiles: default
+2019-10-13 16:31:40.461  INFO 6640 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-10-13 16:31:40.461  INFO 6640 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-10-13 16:31:42.125  INFO 6640 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-10-13 16:31:42.151  INFO 6640 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-10-13 16:31:42.151  INFO 6640 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.24]
+2019-10-13 16:31:42.244  INFO 6640 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-10-13 16:31:42.244  INFO 6640 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1783 ms
+2019-10-13 16:31:43.002  INFO 6640 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-10-13 16:31:43.086  INFO 6640 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-10-13 16:31:43.272  INFO 6640 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-10-13 16:31:43.326  INFO 6640 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-10-13 16:31:43.330  INFO 6640 --- [restartedMain] l.ciaohi.community.CommunityApplication  : Started CommunityApplication in 3.345 seconds (JVM running for 4.216)
